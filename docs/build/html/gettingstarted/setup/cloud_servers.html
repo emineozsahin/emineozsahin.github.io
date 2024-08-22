@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cloud servers &mdash; Ontology 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=2709fde1"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/toggleprompt.js?v=5801b3bb"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Ontology
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Cloud servers</a><ul>
+<li><a class="reference internal" href="#choosing-a-provider">Choosing a provider</a></li>
+<li><a class="reference internal" href="#configuration">Configuration</a></li>
+<li><a class="reference internal" href="#setting-up">Setting up</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Ontology</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Cloud servers</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/gettingstarted/setup/cloud_servers.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cloud-servers">
+<span id="id1"></span><h1>Cloud servers<a class="headerlink" href="#cloud-servers" title="Link to this heading"></a></h1>
+<p>Put simply, a cloud server (also known as a Virtual Private Server, VPS) is a virtual computer that exists in a remote data centre. You rent the computational resources from a cloud services provider, and are given access to this computer that you can use however you like. Depending on the provider, you might pay a fixed amount every month, or you may pay only for what you use. The benefits of this approach is that, with careful configuration, you only pay for what you use and you gain access to as much computational resources as you like (and can pay for). So rather than spending thousands on a high-powered machine, you can effectively rent one for a week just to do your bioinformatics.</p>
+<p>There are many many cloud services providers out there, with different pricing structures and entry levels. We don’t have the scope here to give detailed recommendations and tutorials, however we can make some general recommendations.</p>
+<section id="choosing-a-provider">
+<h2>Choosing a provider<a class="headerlink" href="#choosing-a-provider" title="Link to this heading"></a></h2>
+<p>We would recommend that first time users choose one of the major VPS providers because they will have the most comprehensive and beginner friendly documentation. These providers include Amazon Web Services (in particular their beginner-friendly service Lightsail), Google Cloud Services, Digital Ocean (who have excellent user guides), and Microsoft Azure. It is very hard to know what sort of computational resources you might need for a project, but we would recommend starting out with around 4 CPUs, 8GB of RAM and storage space equal to 10-15 times the data size of your raw sequences (a MiSeq run generates 4-6 GB of data). You could use this requirement to compare prices from different providers. If you are only running the server to learn from these resources using our example dataset, you can probably get away with 2 CPUs, 4GB of RAM and 15GB of storage.</p>
+</section>
+<section id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Link to this heading"></a></h2>
+<p>Search google for beginner’s tutorials for your chosen provider, which will help walk you through the first steps of selecting VPS configuration, e.g. “set up lightsail server ubuntu”. Select Ubuntu Linux as the operating system, choosing one of the LTS versions (18.04 or 20.04 at the time of writing). All of the command line software in this resource will work on these versions. Use the computational resources above as a starting point, although you may choose to increase them if you have a large dataset or are trying to do something computationally intensive (e.g. running <span class="xref std std-ref">BLAST</span> or <span class="xref std std-ref">metaMATE</span>, or doing <span class="xref std std-ref">phylogenetics</span> might need more CPUs and/or RAM). We suggest choosing a configuration which allows you to easily change computational resources without having to rebuild your server from scratch.</p>
+</section>
+<section id="setting-up">
+<h2>Setting up<a class="headerlink" href="#setting-up" title="Link to this heading"></a></h2>
+<p>Once you have your server running, you will need to log into it using SSH. We have <span class="xref std std-ref">some general instructions for this</span>, but there will be variations depending on the provider, so we suggest you look for a tutorial for your specific provider and the operating system of your personal computer, e.g. “SSH access to azure VPS from mac OS”. If you’re completely new to the Linux command line environment, you might want to check out some <span class="xref std std-ref">introductory help</span>. Once you have accessed the server, you should ensure that you configure any administration and security software and settings - again, search for a tutorial for your specific provider, for example “set up digital ocean firewall and user accounts”.</p>
+<p>You can then go ahead and install the software you will need for bioinformatics. You can either just install all of the software as detailed on <span class="xref std std-ref">the software page</span>, or you can just go ahead and start working through these resources and install software as you need it: each tutorial clearly states which software is required and links to the relevant installation instructions.</p>
+<p>Finally, you will want to send your data to the server. You can do this by downloading it directly from your sequencing provider’s website or FTP server using <code class="docutils literal notranslate"><span class="pre">wget</span></code> or <code class="docutils literal notranslate"><span class="pre">ftp</span></code>. Alternatively you can upload it from your personal computer using <span class="xref std std-ref">FTP software</span>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Emine Ozsahin.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

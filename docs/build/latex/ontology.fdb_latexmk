@@ -1,0 +1,21 @@
+# Fdb version 4
+["pdflatex"] 1724234882.41431 "ontology.tex" "ontology.pdf" "ontology" 1724234998.47645 2
+  "/Users/eozsahin/Library/TinyTeX/texmf-dist/tex/latex/base/inputenc.sty" 1705352648 5048 425739d70251273bf93e3d51f3c40048 ""
+  "/Users/eozsahin/Library/TinyTeX/texmf-dist/tex/latex/base/report.cls" 1705352648 23203 f5d913095ece2233436f0e628619cd37 ""
+  "/Users/eozsahin/Library/TinyTeX/texmf-dist/tex/latex/base/size10.clo" 1705352648 8448 dbc0dbf4156c0bb9ba01a1c685d3bad0 ""
+  "/Users/eozsahin/Library/TinyTeX/texmf-dist/tex/latex/base/textcomp.sty" 1705352648 2894 fc64867f9d198785eabe71a88276a9cb ""
+  "/Users/eozsahin/Library/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty" 1705871765 220920 fd3cbb5f1a2bc9b8f451b8b7d8171264 ""
+  "/Users/eozsahin/Library/TinyTeX/texmf-dist/web2c/texmf.cnf" 1713064664 41983 7ec6bfd6bf34339a61f0f08f42298e60 ""
+  "/Users/eozsahin/Library/TinyTeX/texmf-var/web2c/pdftex/pdflatex.fmt" 1715978750 6815780 ddab28378a82f92c91e68da1acdd1a68 ""
+  "/Users/eozsahin/Library/TinyTeX/texmf.cnf" 1715978537.8406 701 b975cd90b0588cba71163253d526d02d ""
+  "cmap.sty" 0 -1 0 ""
+  "ontology.aux" 1724234882.41385 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
+  "ontology.pdf" 0 -1 0 "pdflatex"
+  "ontology.tex" 1724234882.09487 2552 86b22e34818bef9483933e6240d37586 ""
+  "sphinx.sty" 1724234071.94688 50659 6d393be3f369a7862f0b19a359f1ab89 ""
+  "sphinxmanual.cls" 1724234071.94859 4241 7b0d7a37df7b5715fb0dbd585c52ecdb ""
+  (generated)
+  "ontology.aux"
+  "ontology.log"
+  "ontology.pdf"
+  (rewritten before read)
