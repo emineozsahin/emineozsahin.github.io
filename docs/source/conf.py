@@ -7,7 +7,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'Ontology'
-copyright = '2024, Emine Ozsahin'
+copyright = '2024, Center for Biodiversity Genomics'
 author = 'Emine Ozsahin'
 release = '0.1'
 
