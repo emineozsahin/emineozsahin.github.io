@@ -1,5 +1,53 @@
 .. _size_filter:
 
-===============
 Size Filter
-===============
+===========
+
+This section describes the size filtering process applied to reads in a FASTA file. If you provide a .fastq file, ONTOLOGY will convert it to a .fasta file.
+
+Task Overview
+-------------
+
+The size filtering process involves retaining reads in a FASTA file that meet the specified minimum and maximum read lengths. The goal is to filter out reads that are too short or too long, and log the count of reads that pass the filter.
+
+Steps
+-----
+
+1. **Execute Read Filtering**: 
+   A command-line tool called ``cutadapt`` is used to filter the reads in the FASTQ file. The tool is configured with two key parameters:
+
+   - **Minimum read length**: Only reads longer than this value are retained.
+   - **Maximum read length**: Only reads shorter than this value are retained.
+
+   The reads that meet these criteria are saved to a new file.
+
+2. **Count Filtered Reads**: 
+   After the filtering process is complete, the number of reads in the filtered FASTA file is counted.
+
+3. **Log the Results**: 
+   The read count is logged in two ways:
+
+   - It is appended to a file called ``readcounts``, which stores the number of reads after filtering to be used in plotting.
+   - It is also outputted for user visibility, showing how many reads passed the filtering criteria.
+
+
+Key Command
+-----------
+
+The filtering is performed using the following command:
+
+.. code-block:: bash
+
+   cutadapt -j <max_cores> -m <min_read_length> -M <max_read_length> -o file.fasta_filtered file.fasta
+
+Where:
+   - ``-j <max_cores>``: Specifies the maximum number of CPU cores to use for parallel processing.
+   - ``-m <min_read_length>``: Defines the minimum read length.
+   - ``-M <max_read_length>``: Defines the maximum read length.
+   - ``-o file.fasta_filtered``: Specifies the output file for filtered reads.
+   - ``file.fasta``: The input FASTA file containing unfiltered reads.
+
+Result
+------
+
+At the end of the process, the original FASTA file is replaced by the filtered version. Additionally, the log file (``readcounts.txt``) is updated with the number of reads that passed the filter.

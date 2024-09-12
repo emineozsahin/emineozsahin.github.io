@@ -10,8 +10,6 @@ Introduction
 
 Welcome to the online resources for ONTOLOGY DNA Barcoding. ONTOLOGY supports the preparation of specimens for barcoding by assembling required data in a structured format ready for upload to BOLD.
 
-Prepare involves three steps array specimens, record collateral data, and place each tissue sample in a DNA Extraction plate. Once these steps are complete for all specimens in the project, the array image(s), metadata, and specimen images are uploaded to BOLD.
-
 Feedback
 ========
 

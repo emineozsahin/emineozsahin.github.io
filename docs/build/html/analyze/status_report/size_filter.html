@@ -29,7 +29,7 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Demultiplex" href="demultiplex.html" />
+    <link rel="next" title="Demultiplexing" href="demultiplexing.html" />
     <link rel="prev" title="Status Report" href="../status_report.html" /> 
 </head>
 
@@ -62,7 +62,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../analyze.html">Analyze</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../status_report.html">Status Report</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Size Filter</a></li>
-<li class="toctree-l3"><a class="reference internal" href="demultiplex.html">Demultiplex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="demultiplexing.html">Demultiplexing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="primer_trim.html">Primer Trim</a></li>
 <li class="toctree-l3"><a class="reference internal" href="primary_clustering.html">Primary Clustering</a></li>
 <li class="toctree-l3"><a class="reference internal" href="secondary_clustering.html">Secondary Clustering</a></li>
@@ -104,6 +104,54 @@
              
   <section id="size-filter">
 <span id="id1"></span><h1>Size Filter<a class="headerlink" href="#size-filter" title="Link to this heading"></a></h1>
+<p>This section describes the size filtering process applied to reads in a FASTA file. If you provide a .fastq file, ONTOLOGY will convert it to a .fasta file.</p>
+<section id="task-overview">
+<h2>Task Overview<a class="headerlink" href="#task-overview" title="Link to this heading"></a></h2>
+<p>The size filtering process involves retaining reads in a FASTA file that meet the specified minimum and maximum read lengths. The goal is to filter out reads that are too short or too long, and log the count of reads that pass the filter.</p>
+</section>
+<section id="steps">
+<h2>Steps<a class="headerlink" href="#steps" title="Link to this heading"></a></h2>
+<ol class="arabic">
+<li><p><strong>Execute Read Filtering</strong>:
+A command-line tool called <code class="docutils literal notranslate"><span class="pre">cutadapt</span></code> is used to filter the reads in the FASTQ file. The tool is configured with two key parameters:</p>
+<ul class="simple">
+<li><p><strong>Minimum read length</strong>: Only reads longer than this value are retained.</p></li>
+<li><p><strong>Maximum read length</strong>: Only reads shorter than this value are retained.</p></li>
+</ul>
+<p>The reads that meet these criteria are saved to a new file.</p>
+</li>
+<li><p><strong>Count Filtered Reads</strong>:
+After the filtering process is complete, the number of reads in the filtered FASTA file is counted.</p></li>
+<li><p><strong>Log the Results</strong>:
+The read count is logged in two ways:</p>
+<ul class="simple">
+<li><p>It is appended to a file called <code class="docutils literal notranslate"><span class="pre">readcounts</span></code>, which stores the number of reads after filtering to be used in plotting.</p></li>
+<li><p>It is also outputted for user visibility, showing how many reads passed the filtering criteria.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="key-command">
+<h2>Key Command<a class="headerlink" href="#key-command" title="Link to this heading"></a></h2>
+<p>The filtering is performed using the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cutadapt<span class="w"> </span>-j<span class="w"> </span>&lt;max_cores&gt;<span class="w"> </span>-m<span class="w"> </span>&lt;min_read_length&gt;<span class="w"> </span>-M<span class="w"> </span>&lt;max_read_length&gt;<span class="w"> </span>-o<span class="w"> </span>file.fasta_filtered<span class="w"> </span>file.fasta
+</pre></div>
+</div>
+<dl class="simple">
+<dt>Where:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-j</span> <span class="pre">&lt;max_cores&gt;</span></code>: Specifies the maximum number of CPU cores to use for parallel processing.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-m</span> <span class="pre">&lt;min_read_length&gt;</span></code>: Defines the minimum read length.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-M</span> <span class="pre">&lt;max_read_length&gt;</span></code>: Defines the maximum read length.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-o</span> <span class="pre">file.fasta_filtered</span></code>: Specifies the output file for filtered reads.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">file.fasta</span></code>: The input FASTA file containing unfiltered reads.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="result">
+<h2>Result<a class="headerlink" href="#result" title="Link to this heading"></a></h2>
+<p>At the end of the process, the original FASTA file is replaced by the filtered version. Additionally, the log file (<code class="docutils literal notranslate"><span class="pre">readcounts.txt</span></code>) is updated with the number of reads that passed the filter.</p>
+</section>
 </section>
 
 
@@ -111,7 +159,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../status_report.html" class="btn btn-neutral float-left" title="Status Report" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="demultiplex.html" class="btn btn-neutral float-right" title="Demultiplex" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="demultiplexing.html" class="btn btn-neutral float-right" title="Demultiplexing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
