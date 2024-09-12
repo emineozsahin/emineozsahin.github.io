@@ -107,6 +107,7 @@
 <p>This section describes the steps involved in demultiplexing reads based on specific Universal Molecular Identifiers (UMIs) at the 5’ end of sequences.</p>
 <section id="task-overview">
 <h2>Task Overview<a class="headerlink" href="#task-overview" title="Link to this heading"></a></h2>
+<p>Demultiplexing allows multiple samples to be sequenced in a single run, significantly reducing costs and maximizing resource efficiency.</p>
 <p>The demultiplexing process separates sequences based on UMIs found at both ends of the reads. It then filters reads, moves files into appropriate directories, renames the files based on mapping, and performs additional filtering by read length. The process ends by generating a summary of the read count.</p>
 </section>
 <section id="steps">
@@ -127,6 +128,19 @@
 <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">cutadapt_trim5_cmd</span><span class="p">,</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cutadapt<span class="w"> </span>-j<span class="w"> </span>&lt;max_cores&gt;<span class="w"> </span>-e<span class="w"> </span><span class="m">2</span><span class="w"> </span>-O<span class="w"> </span><span class="m">12</span><span class="w"> </span>-g<span class="w"> </span>file:&lt;UMI_file_path&gt;<span class="w"> </span>-o<span class="w"> </span>trimmed-<span class="o">{</span>name<span class="o">}</span>.for5.fasta<span class="w"> </span>all.fasta
+</pre></div>
+</div>
+<p>Where:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-j</span> <span class="pre">&lt;max_cores&gt;</span></code>: Specifies the number of CPU cores to use.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-e</span> <span class="pre">2</span></code>: Allows a maximum error rate of 2 mismatches.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-O</span> <span class="pre">12</span></code>: Requires a minimum overlap of 12 bases for the adapter (UMI) to match.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-g</span> <span class="pre">file:&lt;UMI_file_path&gt;</span></code>: Specifies the file containing the UMI sequences.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-o</span> <span class="pre">trimmed-{name}.for5.fasta</span></code>: Output file pattern for the demultiplexed reads.</p></li>
+</ul>
+</div></blockquote>
 </li>
 <li><p><strong>Reverse Complement Reads</strong>:</p>
 <p>For reads that do not contain a 5’ UMI, the script generates their reverse complement using <cite>seqtk</cite>. These reverse complemented reads are then subjected to another round of UMI search at the new 5’ end.</p>
@@ -134,6 +148,9 @@
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">seqtk_rc_cmd</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">seqtk_path</span><span class="p">),</span> <span class="s1">&#39;seq&#39;</span><span class="p">,</span> <span class="s1">&#39;-r&#39;</span><span class="p">,</span> <span class="s1">&#39;trimmed-unknown.for5.fasta&#39;</span><span class="p">]</span>
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;trimmed-unknown.for5.rc.fasta&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
     <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">seqtk_rc_cmd</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">outfile</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>seqtk<span class="w"> </span>seq<span class="w"> </span>-r<span class="w"> </span>trimmed-unknown.for5.fasta<span class="w"> </span>&gt;<span class="w"> </span>trimmed-unknown.for5.rc.fasta
 </pre></div>
 </div>
 </li>
@@ -146,14 +163,13 @@
         <span class="n">f_merged</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f_reverse</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>  <span class="c1"># Write contents of the reverse file</span>
 </pre></div>
 </div>
-</li>
-<li><p><strong>Clean Up Intermediate Files</strong>:</p>
-<p>After the merging process, the intermediate files (forward and reverse reads) are moved to a designated folder, and any temporary or unknown sequence files are removed.</p>
-<p>Example Code:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">file_path</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;*for5.fasta&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;*for3.fasta&#39;</span><span class="p">):</span>
-    <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;line208&quot;</span><span class="p">)</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat<span class="w"> </span>trimmed-bc&lt;i&gt;.for5.fasta<span class="w"> </span>trimmed-bc&lt;i&gt;.for3.fasta<span class="w"> </span>&gt;<span class="w"> </span>bc&lt;i&gt;.fasta
 </pre></div>
 </div>
+<p>Where <code class="docutils literal notranslate"><span class="pre">&lt;i&gt;</span></code> represents the UMI index.</p>
+</li>
+<li><p><strong>Clean Up Intermediate Files</strong>:</p>
+<p>After the merging process, any temporary or unknown sequence files are removed.</p>
 </li>
 <li><p><strong>Map and Rename Files</strong>:</p>
 <p>Using a mapping file, the script renames the demultiplexed files to meaningful names based on sample IDs. The mapping file contains UMI combinations and their corresponding sample identifiers. The script processes each line of the mapping file, renaming the files accordingly.</p>
@@ -173,42 +189,6 @@
 </li>
 <li><p><strong>Generate Read Count Summary</strong>:</p>
 <p>A read count is calculated after demultiplexing and filtering. The count is logged and saved in a file named <code class="docutils literal notranslate"><span class="pre">readcounts.txt</span></code>, providing a summary of the total number of reads remaining after the demultiplexing and filtering steps.</p>
-</li>
-</ol>
-</section>
-<section id="key-commands">
-<h2>Key Commands<a class="headerlink" href="#key-commands" title="Link to this heading"></a></h2>
-<p>The main tools used in this process are <cite>cutadapt</cite> and <cite>seqtk</cite>. Below are some of the key commands executed during the process:</p>
-<ol class="arabic">
-<li><p><strong>Search for UMIs at 5’ End</strong>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cutadapt<span class="w"> </span>-j<span class="w"> </span>&lt;max_cores&gt;<span class="w"> </span>-e<span class="w"> </span><span class="m">2</span><span class="w"> </span>-O<span class="w"> </span><span class="m">12</span><span class="w"> </span>-g<span class="w"> </span>file:&lt;UMI_file_path&gt;<span class="w"> </span>-o<span class="w"> </span>trimmed-<span class="o">{</span>name<span class="o">}</span>.for5.fasta<span class="w"> </span>all.fasta
-</pre></div>
-</div>
-<p>Where:
-- <code class="docutils literal notranslate"><span class="pre">-j</span> <span class="pre">&lt;max_cores&gt;</span></code>: Specifies the number of CPU cores to use.
-- <code class="docutils literal notranslate"><span class="pre">-e</span> <span class="pre">2</span></code>: Allows a maximum error rate of 2 mismatches.
-- <code class="docutils literal notranslate"><span class="pre">-O</span> <span class="pre">12</span></code>: Requires a minimum overlap of 12 bases for the adapter (UMI) to match.
-- <code class="docutils literal notranslate"><span class="pre">-g</span> <span class="pre">file:&lt;UMI_file_path&gt;</span></code>: Specifies the file containing the UMI sequences.
-- <code class="docutils literal notranslate"><span class="pre">-o</span> <span class="pre">trimmed-{name}.for5.fasta</span></code>: Output file pattern for the demultiplexed reads.</p>
-</li>
-<li><p><strong>Reverse Complement Reads</strong>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>seqtk<span class="w"> </span>seq<span class="w"> </span>-r<span class="w"> </span>trimmed-unknown.for5.fasta<span class="w"> </span>&gt;<span class="w"> </span>trimmed-unknown.for5.rc.fasta
-</pre></div>
-</div>
-<p>This command generates the reverse complement of reads that do not contain a 5’ UMI.</p>
-</li>
-<li><p><strong>Merge Forward and Reverse Reads</strong>:</p>
-<p>For each UMI, the forward and reverse demultiplexed reads are merged:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat<span class="w"> </span>trimmed-bc&lt;i&gt;.for5.fasta<span class="w"> </span>trimmed-bc&lt;i&gt;.for3.fasta<span class="w"> </span>&gt;<span class="w"> </span>bc&lt;i&gt;.fasta
-</pre></div>
-</div>
-<p>Where <code class="docutils literal notranslate"><span class="pre">&lt;i&gt;</span></code> represents the UMI index.</p>
-</li>
-<li><p><strong>Filter by Read Length</strong>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>size_filter<span class="w"> </span>&lt;file&gt;<span class="w"> </span>&lt;min_length&gt;<span class="w"> </span>&lt;max_length&gt;
-</pre></div>
-</div>
-<p>This command filters each FASTA file based on minimum and maximum read length criteria.</p>
 </li>
 </ol>
 </section>

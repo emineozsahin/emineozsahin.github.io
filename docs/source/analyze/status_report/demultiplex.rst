@@ -41,7 +41,9 @@ Steps
 
       cutadapt -j <max_cores> -e 2 -O 12 -g file:<UMI_file_path> -o trimmed-{name}.for5.fasta all.fasta
 
-      Where:
+
+   Where:
+
       - ``-j <max_cores>``: Specifies the number of CPU cores to use.
       - ``-e 2``: Allows a maximum error rate of 2 mismatches.
       - ``-O 12``: Requires a minimum overlap of 12 bases for the adapter (UMI) to match.

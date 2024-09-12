@@ -20,28 +20,36 @@ Steps
 
    - **Minimum read length**: Only reads longer than this value are retained.
    - **Maximum read length**: Only reads shorter than this value are retained.
-   
+
+
    .. code-block:: bash
 
       cutadapt -j <max_cores> -m <min_read_length> -M <max_read_length> -o file.fasta_filtered file.fasta
 
    Where:
+
       - ``-j <max_cores>``: Specifies the maximum number of CPU cores to use for parallel processing.
       - ``-m <min_read_length>``: Defines the minimum read length.
       - ``-M <max_read_length>``: Defines the maximum read length.
       - ``-o file.fasta_filtered``: Specifies the output file for filtered reads.
       - ``file.fasta``: The input FASTA file containing unfiltered reads.
 
-   The reads that meet these criteria are saved to a new file.
 
 2. **Count Filtered Reads**: 
    After the filtering process is complete, the number of reads in the filtered FASTA file is counted.
+
+
+
+.. rubric::
+
+
 
 3. **Log the Results**: 
    The read count is logged in two ways:
 
    - It is appended to a file called ``readcounts``, which stores the number of reads after filtering to be used in plotting.
    - It is also outputted for user visibility, showing how many reads passed the filtering criteria.
+
 
 
 Result

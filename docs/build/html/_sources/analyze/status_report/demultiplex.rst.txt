@@ -10,6 +10,8 @@ This section describes the steps involved in demultiplexing reads based on speci
 Task Overview
 -------------
 
+Demultiplexing allows multiple samples to be sequenced in a single run, significantly reducing costs and maximizing resource efficiency. 
+
 The demultiplexing process separates sequences based on UMIs found at both ends of the reads. It then filters reads, moves files into appropriate directories, renames the files based on mapping, and performs additional filtering by read length. The process ends by generating a summary of the read count.
 
 Steps
@@ -34,6 +36,21 @@ Steps
       ]
       subprocess.run(cutadapt_trim5_cmd, capture_output=True)
 
+
+   .. code-block:: bash
+
+      cutadapt -j <max_cores> -e 2 -O 12 -g file:<UMI_file_path> -o trimmed-{name}.for5.fasta all.fasta
+
+
+   Where:
+
+      - ``-j <max_cores>``: Specifies the number of CPU cores to use.
+      - ``-e 2``: Allows a maximum error rate of 2 mismatches.
+      - ``-O 12``: Requires a minimum overlap of 12 bases for the adapter (UMI) to match.
+      - ``-g file:<UMI_file_path>``: Specifies the file containing the UMI sequences.
+      - ``-o trimmed-{name}.for5.fasta``: Output file pattern for the demultiplexed reads.
+
+
 2. **Reverse Complement Reads**:
 
    For reads that do not contain a 5' UMI, the script generates their reverse complement using `seqtk`. These reverse complemented reads are then subjected to another round of UMI search at the new 5' end.
@@ -45,6 +62,12 @@ Steps
       seqtk_rc_cmd = [str(seqtk_path), 'seq', '-r', 'trimmed-unknown.for5.fasta']
       with open('trimmed-unknown.for5.rc.fasta', 'w') as outfile:
           subprocess.run(seqtk_rc_cmd, stdout=outfile)
+
+
+   .. code-block:: bash
+
+      seqtk seq -r trimmed-unknown.for5.fasta > trimmed-unknown.for5.rc.fasta
+
 
 3. **Merge Forward and Reverse Reads**:
 
@@ -59,16 +82,17 @@ Steps
               f_merged.write(f_forward.read())  # Write contents of the forward file
               f_merged.write(f_reverse.read())  # Write contents of the reverse file
 
+
+   .. code-block:: bash
+
+      cat trimmed-bc<i>.for5.fasta trimmed-bc<i>.for3.fasta > bc<i>.fasta
+
+   Where ``<i>`` represents the UMI index.
+
+
 4. **Clean Up Intermediate Files**:
 
-   After the merging process, the intermediate files (forward and reverse reads) are moved to a designated folder, and any temporary or unknown sequence files are removed.
-
-   Example Code:
-
-   .. code-block:: python
-
-      for file_path in glob.glob('*for5.fasta') + glob.glob('*for3.fasta'):
-          shutil.move(file_path, "line208")
+   After the merging process, any temporary or unknown sequence files are removed.
 
 5. **Map and Rename Files**:
 
@@ -90,52 +114,9 @@ Steps
 
    After demultiplexing, the script filters the reads by length using a specified minimum and maximum threshold. 
 
+
 7. **Generate Read Count Summary**:
 
    A read count is calculated after demultiplexing and filtering. The count is logged and saved in a file named ``readcounts.txt``, providing a summary of the total number of reads remaining after the demultiplexing and filtering steps.
 
-
-Key Commands
-------------
-
-The main tools used in this process are `cutadapt` and `seqtk`. Below are some of the key commands executed during the process:
-
-1. **Search for UMIs at 5' End**:
-
-   .. code-block:: bash
-
-      cutadapt -j <max_cores> -e 2 -O 12 -g file:<UMI_file_path> -o trimmed-{name}.for5.fasta all.fasta
-
-   Where:
-   - ``-j <max_cores>``: Specifies the number of CPU cores to use.
-   - ``-e 2``: Allows a maximum error rate of 2 mismatches.
-   - ``-O 12``: Requires a minimum overlap of 12 bases for the adapter (UMI) to match.
-   - ``-g file:<UMI_file_path>``: Specifies the file containing the UMI sequences.
-   - ``-o trimmed-{name}.for5.fasta``: Output file pattern for the demultiplexed reads.
-
-2. **Reverse Complement Reads**:
-
-   .. code-block:: bash
-
-      seqtk seq -r trimmed-unknown.for5.fasta > trimmed-unknown.for5.rc.fasta
-
-   This command generates the reverse complement of reads that do not contain a 5' UMI.
-
-3. **Merge Forward and Reverse Reads**:
-
-   For each UMI, the forward and reverse demultiplexed reads are merged:
-
-   .. code-block:: bash
-
-      cat trimmed-bc<i>.for5.fasta trimmed-bc<i>.for3.fasta > bc<i>.fasta
-
-   Where ``<i>`` represents the UMI index.
-
-4. **Filter by Read Length**:
-
-   .. code-block:: bash
-
-      size_filter <file> <min_length> <max_length>
-
-   This command filters each FASTA file based on minimum and maximum read length criteria.
 
