@@ -9,7 +9,6 @@ Analyze
 .. toctree::
 	:hidden:
 	
-	analyze/analyze
 	analyze/status_report
 	analyze/otu_summary
 	analyze/upload_to_bold
