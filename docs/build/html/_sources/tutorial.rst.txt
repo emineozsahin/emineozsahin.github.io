@@ -1,4 +1,0 @@
-Tutorial
-========
-
-This is the tutorial section where you will learn how to use the project.
