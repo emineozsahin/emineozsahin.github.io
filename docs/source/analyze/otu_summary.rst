@@ -1,5 +1,5 @@
-.. _summary:
+.. _otu_summary:
 
 ===============
-Summary
+OTU Summary
 ===============

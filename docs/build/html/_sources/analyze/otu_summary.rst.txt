@@ -1,4 +1,4 @@
-.. _summary:
+.. _otu_summary:
 
 ===============
 OTU Summary

@@ -11,7 +11,8 @@ Analyze
 	
 	analyze/analyze
 	analyze/status_report
-	analyze/summary
+	analyze/otu_summary
+	analyze/upload_to_bold
 	
 
 Introduction
