@@ -6,5 +6,10 @@ I select NGINX to package my website since the NGINX is working 2.5 times faster
 [SEO](https://www.hostinger.com/tutorials/what-is-seo/)
 
 
+# cbgontology
+use ```make github``` instead of ```make html``` in cbgontology/docs to build html. 
+
+
+
 
 
