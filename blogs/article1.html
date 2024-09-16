@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="This is a basic HTML template.">
+    <meta name="keywords" content="HTML, docker, Azure Devops">
+    <meta name="author" content="Emine Ozsahin">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="icon" href="../assets/img/icon.png">
+    <title>Cloud Computing</title>
+</head>
+<style>
+    h1{
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    /*img{*/
+    /*    !*display: block;*!*/
+    /*    border: 2px solid black;*/
+    /*    margin: 20px auto;*/
+    /*}*/
+
+    article{
+        width: 1200px;
+        margin: 10px auto;
+    }
+
+    ul{
+        list-style-type: none;
+    }
+</style>
+
+
+<body>
+<header>
+    <div id="icon">
+        <a href="../index.html">
+            <img src="../assets/img/icon.png" alt="Logo">
+        </a>
+    </div>
+
+    <div id="title">
+        <a href="../blogs/about_me.html" id="about me">
+            <h1 id="blog-title">Emine Ozsahin</h1>
+        </a>
+        <p id="tagline">Understanding Bioinformatics and Cloud Computing</p>
+    </div>
+</header>
+
+<!-- Navigation bar -->
+<nav>
+    <div class="dropdown-container">
+        <div class="dropdown">
+            <a href="../index.html">
+                <!--                        <button class="dropbtn">Home</button>-->
+            </a>
+        </div>
+
+        <div class="dropdown">
+            <button class="dropbtn">About</button>
+            <div class="dropdown-content">
+                <a href="../blogs/about_me.html">About Me</a>
+                <a href="#">Contact</a>
+                <a href="https://www.credly.com/users/emine-ozsahin/badges">Certifications</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <button class="dropbtn">Bioinformatics</button>
+            <div class="dropdown-content">
+                <a href="#">Genome Assembly</a>
+                <a href="#">RNA Sequencing</a>
+                <a href="#">Metagenomics</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <button class="dropbtn">Cloud Computing</button>
+            <div class="dropdown-content">
+                <a href="#">Azure</a>
+                <a href="#">AWS</a>
+                <a href="#">Google</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Form -->
+    <!--            <form id="search_button" action="http://localhost:63342/public_html" method="GET"> &lt;!&ndash; action attribute should point to your search processing URL &ndash;&gt;-->
+    <!--                <input type="text" name="query" placeholder="Search...">-->
+    <!--                <button type="submit">Search</button>-->
+    <!--            </form>-->
+
+</nav>
+
+
+<!--Article-->
+<article>
+    <img src="../assets/img/article1.png" alt="Azure Compute Services">
+    <h1>Choosing Between Azure Compute Services</h1>
+    <p>In the vast expanse of cloud computing, making the right architectural decisions can be daunting.
+        Azure, Microsoft's flagship cloud platform, offers a plethora of computing services, each tailored to specific needs.
+        But with such an abundance of options, how does one decide which service aligns best with their application's requirements?
+        Whether you're an enterprise architect planning a large-scale deployment or a developer launching a passion project,
+        understanding the nuances and strengths of each Azure Compute service is pivotal. This post aims to demystify these choices,
+        offering a comprehensive comparison based on performance, cost, and scalability. Let's embark on this journey to
+        ensure your next cloud endeavour is both informed and optimal.</p>
+    <p><strong>Comparison Criteria:</strong> Performance, Cost, Scalability</p>
+<!--    <ul>-->
+<!--        <p><li></li></p>-->
+<!--        <p><li></li></p>-->
+<!--        <p><li></li></p>-->
+<!--    </ul>-->
+    <br>
+    <br>
+    <br>
+
+
+    <h2>Virtual Machines vs. Azure Web App</h2>
+    <ul>
+        <li><p><strong>Performance:</strong></p>
+            <ol style="padding-left: 50px">
+                <li><p><strong>Virtual Machines:</strong> Offers dedicated resources and is suitable for applications that require intense computational power or
+                specific OS configurations. For instance, a financial firm running complex simulations might benefit
+                from the raw power of VMs.</p></li>
+                <li><p><strong>Azure Web App:</strong> Optimized for web hosting. An e-commerce website with fluctuating traffic would benefit from the auto-scaling features of Azure Web App without worrying about the underlying infrastructure.</p></li>
+            </ol>
+        </li>
+
+        <li><p><strong>Cost:</strong> While VMs are billed when running continuously, Azure Web App costs can be optimized with App Service Plans, especially when hosting multiple websites.</p></li>
+        <li><p><strong>Scalability:</strong> VMs require manual scaling and configurations. Azure Web App can automatically scale out based on web traffic.<li><p>
+    </ul>
+
+    <h2>Virtual Machines vs. Azure Functions</h2>
+    <ul>
+        <li><p><strong>Performance:</strong></p>
+            <ol style="padding-left: 50px">
+                <li><p><strong>Virtual Machines:</strong> VMs offer dedicated resources, providing a consistent performance level for applications that require continuous operations. For instance, a data analytics application processing large datasets 24/7 might benefit from the consistent performance of VMs.</p></li>
+                <li><p><strong>Azure Functions:</strong> Being event-driven, Azure Functions are designed to respond quickly to triggers. For example, a real-time alerting system that notifies users of stock price changes would leverage Azure Functions for swift, on-demand computations.</p></li>
+            </ol>
+        </li>
+
+        <li><p><strong>Cost:</strong></p>
+            <ol style="padding-left: 50px">
+                <li><p><strong>Virtual Machines:</strong> VMs are billed based on their running time, regardless of whether they're actively processing tasks or idle. A VM continuously running can accumulate higher costs.</p></li>
+                <li><p><strong>Azure Functions:</strong> As a serverless solution, Azure Functions are billed based on the actual execution time and the number of executions. This can be cost-effective for sporadic or event-driven tasks. For example, a system that generates invoices at the end of each month would only incur costs during the invoice generation period using Azure Functions.</p></li>
+            </ol>
+        </li>
+
+        <li><p><strong>Scalability:</strong></p>
+            <ol style="padding-left: 50px">
+                <li><p><strong>Virtual Machines:</strong> Scaling VMs typically involves provisioning additional VM instances, which can take time and might require manual configuration. VMs are more static in nature, making them less flexible to sudden spikes in demand.</p></li>
+                <li><p><strong>Azure Functions:</strong> Designed for automatic scalability, Azure Functions can instantly scale out based on the number of incoming events or triggers. For instance, a content delivery system that generates thumbnails for uploaded images would benefit from Azure Functions' ability to scale immediately based on the number of uploads.</p></li>
+            </ol>
+        </li>
+
+    </ul>
+
+
+    <h2>Azure Service Fabric vs. Azure Kubernetes Services (AKS)</h2>
+
+    <ul>
+        <li><p><strong>Performance:</strong></p>
+            <ol style="padding-left: 50px">
+                <li><p><strong>Azure Service Fabric:</strong> Service Fabric provides a robust platform for building and deploying microservices. With its native support for both stateful and stateless services, it ensures high availability and reliability. For example, a financial application that requires stateful processing across a distributed system can rely on Service Fabric for performance and resilience.</p></li>
+                <li><p><strong>Azure Kubernetes Service (AKS)</strong> As a managed Kubernetes service, AKS offers efficient orchestration of containerized applications. Companies deploying modern apps, like an online streaming service, can utilize AKS to ensure smooth performance even during high traffic spikes.</p></li>
+            </ol>
+        </li>
+
+        <li><p><strong>Cost:</strong></p>
+            <ol style="padding-left: 50px">
+                <li><p><strong>Azure Service Fabric:</strong> Costs are associated with the underlying VMs or compute resources used. Depending on the cluster size and the type of nodes chosen, costs can vary. If you're using the platform for complex, continuously running applications, it's essential to optimize configurations to manage expenses.</p></li>
+                <li><p><strong>Azure Kubernetes Service (AKS)</strong> While the Kubernetes management layer in AKS is free, you only pay for the virtual machines and associated storage and networking resources. This allows for cost optimization based on workload requirements. For instance, a start-up deploying a new application can start with a small AKS cluster and expand as user traffic grows, ensuring they only pay for what they use.</p></li>
+            </ol>
+        </li>
+
+        <li><p><strong>Scalability:</strong></p>
+            <ol style="padding-left: 50px">
+                <li><p><strong>Azure Service Fabric:</strong> While the Kubernetes management layer in AKS is free, you only pay for the virtual machines and associated storage and networking resources. This allows for cost optimization based on workload requirements. For instance, a start-up deploying a new application can start with a small AKS cluster and expand as user traffic grows, ensuring they only pay for what they use.</p></li>
+                <li><p><strong>Azure Kubernetes Service (AKS):</strong> AKS shines in scalability with the power of Kubernetes behind it. It can automatically adjust based on traffic and resource requirements. Companies running promotional events or flash sales can trust AKS to handle sudden traffic surges, automatically provisioning resources as needed and scaling down post-event.</p></li>
+            </ol>
+        </li>
+
+    </ul>
+
+    <p>Azure offers a plethora of computing services, each designed with specific scenarios in mind.
+        Whether it's traditional VMs, event-driven Azure Functions, a robust platform like Service Fabric,
+        or a container orchestrator like AKS, the key is to understand the nuances of each service.
+        Assess your application's requirements, the desired level of management, and cost implications to make an informed decision.
+        Azure's diverse portfolio ensures that, regardless of your needs, there's a solution waiting for you.
+        Choose wisely and harness the power of the cloud!</p>
+</article>
+
+</body>
+</html>
