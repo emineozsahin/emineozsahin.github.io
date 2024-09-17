@@ -13,12 +13,10 @@
 </head>
 
 <body>
-<div id="wrapper">
-<!-- Header section -->
     <header>
         <div id="icon">
             <a href="index.html" id="logo">
-                <img src="assets/img/icon.png" alt="Logo">
+                <img src="assets/img/mypicture_me.jpg" alt="me" style="width: 200px; height: auto;">
             </a>
         </div>
 
@@ -28,70 +26,55 @@
             </a>
             <p id="tagline">Understanding Bioinformatics and Cloud Computing</p>
         </div>
-
-<!--         Subscription Form -->
-<!--        <form id="subscription" action="AZURE_FUNCTION_URL" method="POST">-->
-<!--            <input type="email" name="email" placeholder="Your Email Address" required>-->
-<!--            <button id="sbutton" type="submit">Subscribe</button>-->
-<!--        </form>-->
     </header>
 
-
-    <!-- Navigation bar -->
-        <nav>
-            <div class="dropdown-container">
-                <div class="dropdown">
-                    <a href="index.html">
-<!--                        <button class="dropbtn">Home</button>-->
-                    </a>
-                </div>
-
-                <div class="dropdown">
-                    <button class="dropbtn">About</button>
-                    <div class="dropdown-content">
-                        <a href="blogs/about_me.html">About Me</a>
-                        <a href="#">Contact</a>
-                        <a href="https://www.credly.com/users/emine-ozsahin/badges">Certifications</a>
-                    </div>
-                </div>
-
-                <div class="dropdown">
-                    <button class="dropbtn">Bioinformatics</button>
-                    <div class="dropdown-content">
-                        <a href="#">Genome Assembly</a>
-                        <a href="#">RNA Sequencing</a>
-                        <a href="#">Metagenomics</a>
-                    </div>
-                </div>
-
-                <div class="dropdown">
-                    <button class="dropbtn">Cloud Computing</button>
-                    <div class="dropdown-content">
-                        <a href="#">Azure</a>
-                        <a href="#">AWS</a>
-                        <a href="#">Google</a>
-                    </div>
+    <nav>
+        <div class="dropdown-container">
+            <div class="dropdown">
+                <button class="dropbtn">About</button>
+                <div class="dropdown-content">
+                    <a href="blogs/about_me.html">About Me</a>
+                    <a href="#">Contact</a>
+                    <a href="https://www.credly.com/users/emine-ozsahin/badges">Certifications</a>
                 </div>
             </div>
 
-<!--             Search Form-->
-<!--            <form id="search_button" action="http://localhost:63342/public_html" method="GET"> &lt;!&ndash; action attribute should point to your search processing URL &ndash;&gt;-->
-<!--                <input type="text" name="query" placeholder="Search...">-->
-<!--                <button type="submit">Search</button>-->
-<!--            </form>-->
+            <div class="dropdown">
+                <button class="dropbtn">Bioinformatics</button>
+                <div class="dropdown-content">
+                    <a href="#">Genome Assembly</a>
+                    <a href="#">RNA Sequencing</a>
+                    <a href="#">Metagenomics</a>
+                </div>
+            </div>
 
-        </nav>
+            <div class="dropdown">
+                <button class="dropbtn">Cloud Computing</button>
+                <div class="dropdown-content">
+                    <a href="#">Azure</a>
+                    <a href="#">AWS</a>
+                    <a href="#">Google</a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
     <main>
-        <!-- New Post -->
+        <article>
+            <a href="blogs/sphinx.html">
+            <h2>Publishing Sphinx Documentation on GitHub Pages</h2>
+            <p>Published on: <time datetime="2024-09-17T12:23">September 17, 2024</time> <span class="category">Category: Documentation</span></p>
+            <img src="assets/img/sphinx.webp" alt="GitHub Pages with Python Sphinx">
+            <p>If you prefer writing technical documentation in ReStructured Text (RST) using Python's Sphinx, you're in good company. 
+                This guide walks you through how to configure and publish your Sphinx documentation on GitHub Pages.</p>
+            </a>
+        </article>
+
         <article>
             <a href="blogs/article1.html">
             <h2>Choosing Between Azure Compute Services</h2>
-<!--            <p>Published on: <time datetime="2023-11-07T12:23">November 07, 2023</time>     <category>Category: Cloud Computing</category></p>-->
             <p>Published on: <time datetime="2023-11-07T12:23">November 07, 2023</time> <span class="category">Category: Cloud Computing</span></p>
-<!--            <a href="blogs/article1.html">-->
             <img src="assets/img/article1.png" alt="Azure Compute Services">
-
             <p>In the vast expanse of cloud computing, making the right architectural decisions can be daunting.
                 Azure, Microsoft's flagship cloud platform, offers a plethora of computing services, each tailored to specific needs.
                 But with such an abundance of options, how does one decide which service aligns best with their application's requirements?
@@ -101,16 +84,11 @@
                 ensure your next cloud endeavour is both informed and optimal.</p>
             </a>
         </article>
-
-
-        <!-- Existing Posts -->
-        <!-- Add your existing posts in similar <article> blocks as above -->
     </main>
 
     <footer>
         <p>&copy; 2023 Emine's Blog. All rights reserved.</p>
     </footer>
-</div>
 
 </body>
 </html>

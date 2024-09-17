@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="This is a basic HTML template.">
+    <meta name="keywords" content="HTML, docker, Azure Devops">
+    <meta name="author" content="Emine Ozsahin">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="icon" href="../assets/img/icon.png">
+    <link rel="stylesheet" href="../assets/css/prism.css">
+    <title>Documentation</title>
+</head>
+
+<body>
+<header>
+    <div id="icon">
+        <a href="../index.html">
+            <img src="../assets/img/mypicture_me.jpg" alt="me" style="width: 200px; height: auto;">
+        </a>
+    </div>
+
+    <div id="title">
+        <a href="../blogs/about_me.html" id="about me">
+            <h1 id="blog-title">Emine Ozsahin</h1>
+        </a>
+        <p id="tagline">Understanding Bioinformatics and Cloud Computing</p>
+    </div>
+</header>
+
+<nav>
+    <div class="dropdown-container">   
+        <div class="dropdown">
+            <button class="dropbtn">About</button>
+            <div class="dropdown-content">
+                <a href="../blogs/about_me.html">About Me</a>
+                <a href="#">Contact</a>
+                <a href="https://www.credly.com/users/emine-ozsahin/badges">Certifications</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <button class="dropbtn">Bioinformatics</button>
+            <div class="dropdown-content">
+                <a href="#">Genome Assembly</a>
+                <a href="#">RNA Sequencing</a>
+                <a href="#">Metagenomics</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <button class="dropbtn">Cloud Computing</button>
+            <div class="dropdown-content">
+                <a href="#">Azure</a>
+                <a href="#">AWS</a>
+                <a href="#">Google</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<main>
+<article>
+    <img src="../assets/img/sphinx.webp" alt="Azure Compute Services">
+    <h1>Publishing Sphinx Documentation on GitHub Pages</h1>
+    <p>If you prefer writing technical documentation in ReStructured Text (RST) using Python’s Sphinx, you’re in good company. This guide walks you through how to configure and publish your Sphinx documentation on GitHub Pages.</p>
+
+    <h2>Step 1: Set Up Your Sphinx Documentation</h2>
+    <p>Before you publish to GitHub Pages, you need to generate your Sphinx documentation. Here's how:</p>
+    <pre><code class="language-python">$ sphinx-quickstart</code></pre>
+    <p>Follow the prompts to configure your Sphinx project. Once you have everything set up, you can build the documentation using:</p>
+    <pre><code>$ make html</code></pre>
+    <pre class="line-numbers"><code class="language-python">
+        def hello_world():
+            print("Hello, world!")
+        </code></pre>
+
+    <h2>Step 2: Create a GitHub Repository</h2>
+    <p>Create a repository on GitHub where you will host your documentation. If you want the URL to be <code>&lt;username&gt;.github.io</code>, name the repository accordingly. Otherwise, you can name it anything, and GitHub Pages will publish the content to a subdirectory.</p>
+
+    <h2>Step 3: Add the <code>/docs</code> Folder</h2>
+    <p>For GitHub Pages to serve your Sphinx-built documentation, follow these steps:</p>
+    <ul>
+        <li>Add a <code>/docs</code> directory to the <code>master</code> branch of your repository.</li>
+        <li>Go to the repository’s <strong>Settings</strong> tab and scroll down to the GitHub Pages section.</li>
+        <li>In the Source dropdown, select the <code>master branch /docs folder</code> option.</li>
+    </ul>
+
+    <h2>Step 4: Create a <code>.nojekyll</code> File</h2>
+    <p>Since GitHub Pages uses Jekyll by default, you need to add a <code>.nojekyll</code> file in the <code>/docs</code> folder to prevent Jekyll processing. To do this:</p>
+    <pre><code>$ touch docs/.nojekyll
+                $ git add docs/.nojekyll
+                $ git commit -m "Add .nojekyll file"
+                $ git push origin master
+            </code></pre>
+
+    <h2>Step 5: Configure Sphinx for GitHub Pages</h2>
+    <p>In your Sphinx <code>conf.py</code> file, set the output directory for HTML builds to the <code>/docs</code> folder:</p>
+    <pre><code>import os
+                import sys
+                sys.path.insert(0, os.path.abspath('.'))
+                html_static_path = ['_static']
+                html_theme = 'alabaster'
+                html_output = 'docs'</code></pre>
+    <p>Now, you can build your HTML files and place them in the <code>/docs</code> directory:</p>
+    <pre><code>$ make html
+                $ cp -r _build/html/. ../docs</code></pre>
+
+    <h2>Step 6: Push Changes and Publish</h2>
+    <p>Once everything is set up, push your changes to GitHub:</p>
+    <pre><code>$ git add .
+                $ git commit -m "Publish Sphinx documentation"
+                $ git push origin master</code></pre>
+    <p>After pushing the changes, GitHub Pages will automatically publish the content in the <code>/docs</code> folder to the URL: <code>&lt;username&gt;.github.io/&lt;repository&gt;</code>.</p>
+
+    <h2>Step 7: Preview and Update</h2>
+    <p>To preview your site, visit the URL provided by GitHub Pages. Make sure everything is working as expected, and continue to update and republish as needed.</p>
+
+    <p>Happy documenting!</p> 
+</article>
+</main>
+<script src="../assets/css/prism.js"></script>
+</body>
+</html>
