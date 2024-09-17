@@ -1,0 +1,15 @@
+# ignore notes
+notes.txt
+
+# ignore ALL .log files
+*.log
+gozleme.css
+gozleme.html
+index2.html
+template.html
+favicon.ico
+
+# ignore ALL files in ANY directory named temp
+temp/
+.idea
+.venv-sphinx
