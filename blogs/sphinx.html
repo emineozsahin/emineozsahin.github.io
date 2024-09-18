@@ -60,62 +60,79 @@
 
 <main>
 <article>
-    <img src="../assets/img/sphinx.webp" alt="Azure Compute Services">
-    <h1>Publishing Sphinx Documentation on GitHub Pages</h1>
-    <p>If you prefer writing technical documentation in ReStructured Text (RST) using Python’s Sphinx, you’re in good company. This guide walks you through how to configure and publish your Sphinx documentation on GitHub Pages.</p>
+    <img src="../assets/img/sphinx.webp" alt="Sphinx documentation">
+    <h1>How to Generate Sphinx Documentation: A Step-by-Step Guide</h1>
+    <p>Sphinx is a powerful documentation generator commonly used for Python projects, but it also supports various languages and formats. Here’s a comprehensive guide to get you started with generating Sphinx documentation.</p>
 
-    <h2>Step 1: Set Up Your Sphinx Documentation</h2>
-    <p>Before you publish to GitHub Pages, you need to generate your Sphinx documentation. Here's how:</p>
-    <pre><code class="language-python">$ sphinx-quickstart</code></pre>
-    <p>Follow the prompts to configure your Sphinx project. Once you have everything set up, you can build the documentation using:</p>
-    <pre><code>$ make html</code></pre>
-    <pre class="line-numbers"><code class="language-python">
-        def hello_world():
-            print("Hello, world!")
-        </code></pre>
+    <h2>Step 1: Install Sphinx</h2>
+    <p>Before you can use Sphinx, you need to install it. You can easily install Sphinx using <code>pip</code>:</p>
+    <pre><code class="language-bash">
+        python -m venv .env_sphinx
+        source .env_sphinx/bin/activate
+        pip install sphinx
+        </code>
+    </pre>
 
-    <h2>Step 2: Create a GitHub Repository</h2>
-    <p>Create a repository on GitHub where you will host your documentation. If you want the URL to be <code>&lt;username&gt;.github.io</code>, name the repository accordingly. Otherwise, you can name it anything, and GitHub Pages will publish the content to a subdirectory.</p>
+    <p>Alternatively, you can install Sphinx via <code>conda</code> if you're using Anaconda:</p>
+    <pre><code class="language-bash">conda install sphinx</code></pre>
 
-    <h2>Step 3: Add the <code>/docs</code> Folder</h2>
-    <p>For GitHub Pages to serve your Sphinx-built documentation, follow these steps:</p>
+    <p>Once installed, verify the installation by checking the version:</p>
+    <pre><code class="language-bash">sphinx-build --version</code></pre>
+
+    <h2>Step 2: Initialize Your Sphinx Project</h2>
+    <p>Navigate to the directory where you want to create your documentation, and run:</p>
+    <pre><code class="language-bash">sphinx-quickstart</code></pre>
+    
+    <p>This command will prompt you with a series of configuration questions:</p>
     <ul>
-        <li>Add a <code>/docs</code> directory to the <code>master</code> branch of your repository.</li>
-        <li>Go to the repository’s <strong>Settings</strong> tab and scroll down to the GitHub Pages section.</li>
-        <li>In the Source dropdown, select the <code>master branch /docs folder</code> option.</li>
+        <li><strong>Root Path:</strong> Choose the directory for your project.</li>
+        <li><strong>Separate Source and Build Directories:</strong> Say <em>yes</em> to separating them.</li>
+        <li><strong>Project Name:</strong> Enter the name of your project.</li>
+        <li><strong>Author Name:</strong> Provide the author’s name.</li>
+        <li><strong>Project Version:</strong> Specify the project version.</li>
+        <li><strong>Enable Extensions:</strong> Choose any relevant Sphinx extensions (e.g., autodoc).</li>
     </ul>
 
-    <h2>Step 4: Create a <code>.nojekyll</code> File</h2>
-    <p>Since GitHub Pages uses Jekyll by default, you need to add a <code>.nojekyll</code> file in the <code>/docs</code> folder to prevent Jekyll processing. To do this:</p>
-    <pre><code>$ touch docs/.nojekyll
-                $ git add docs/.nojekyll
-                $ git commit -m "Add .nojekyll file"
-                $ git push origin master
-            </code></pre>
+    <h2>Step 3: Write Your Documentation</h2>
+    <p>Now that the basic configuration is ready, start writing your documentation. The main file is <code>index.rst</code>. Add additional <code>.rst</code> files as needed, and link them in the <code>toctree</code> directive:</p>
+    <pre><code class="language-python">
+    .. toctree::
+       :maxdepth: 2
+       :caption: Contents:
 
-    <h2>Step 5: Configure Sphinx for GitHub Pages</h2>
-    <p>In your Sphinx <code>conf.py</code> file, set the output directory for HTML builds to the <code>/docs</code> folder:</p>
-    <pre><code>import os
-                import sys
-                sys.path.insert(0, os.path.abspath('.'))
-                html_static_path = ['_static']
-                html_theme = 'alabaster'
-                html_output = 'docs'</code></pre>
-    <p>Now, you can build your HTML files and place them in the <code>/docs</code> directory:</p>
-    <pre><code>$ make html
-                $ cp -r _build/html/. ../docs</code></pre>
+       introduction
+       installation
+       usage
+    </code></pre>
 
-    <h2>Step 6: Push Changes and Publish</h2>
-    <p>Once everything is set up, push your changes to GitHub:</p>
-    <pre><code>$ git add .
-                $ git commit -m "Publish Sphinx documentation"
-                $ git push origin master</code></pre>
-    <p>After pushing the changes, GitHub Pages will automatically publish the content in the <code>/docs</code> folder to the URL: <code>&lt;username&gt;.github.io/&lt;repository&gt;</code>.</p>
+    <h2>Step 4: Customize the Configuration</h2>
+    <p>In <code>conf.py</code>, configure the theme, extensions, and other settings. For example, change the theme to "Read the Docs" by installing it:</p>
+    <pre><code class="language-bash">pip install sphinx_rtd_theme</code></pre>
 
-    <h2>Step 7: Preview and Update</h2>
-    <p>To preview your site, visit the URL provided by GitHub Pages. Make sure everything is working as expected, and continue to update and republish as needed.</p>
+    <p>Then set the theme in <code>conf.py</code>:</p>
+    <pre><code class="language-python">html_theme = 'sphinx_rtd_theme'</code></pre>
 
-    <p>Happy documenting!</p> 
+    <h2>Step 5: Build the Documentation</h2>
+    <p>After writing your documentation and configuring Sphinx, you can generate HTML files by running:</p>
+    <pre><code class="language-bash">make html</code></pre>
+
+    <p>The generated HTML files will be in the <code>_build/html</code> directory. You can open the <code>index.html</code> file to view the documentation in a browser:</p>
+    <pre><code class="language-bash">open _build/html/index.html</code></pre>
+
+    <h2>Bonus: Using Autodoc to Generate API Documentation</h2>
+    <p>If you're working on a Python project, you can use autodoc to generate documentation from your code's docstrings. First, add <code>sphinx.ext.autodoc</code> to your <code>conf.py</code>:</p>
+    <pre><code class="language-python">extensions = ['sphinx.ext.autodoc']</code></pre>
+
+    <p>Then, create an <code>api.rst</code> file and use the <code>automodule</code> directive:</p>
+    <pre><code class="language-python">
+    .. automodule:: mymodule
+       :members:
+    </code></pre>
+
+    <p>Rebuild the documentation to include the API docs:</p>
+    <pre><code class="language-bash">make html</code></pre>
+
+    <p>And you're done! You've successfully generated Sphinx documentation.</p>
 </article>
 </main>
 <script src="../assets/css/prism.js"></script>
