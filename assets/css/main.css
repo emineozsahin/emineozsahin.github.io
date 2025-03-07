@@ -241,3 +241,16 @@ pre {
 a {
     color: #3498db;
 }
+
+pre {
+    margin: 10px 0; /* Adjust the margin to reduce space around the block */
+    padding: 5px; /* Reduce padding inside the code block */
+    background-color: #f4f4f4; /* You can also change the background color if needed */
+    border-radius: 5px; /* Optional: Add a little rounding to the corners */
+    overflow: auto; /* Ensures scrolling for long code */
+}
+
+code {
+    padding: 0; /* Removes extra padding from code */
+    background: none; /* Removes the background from inline code */
+}
